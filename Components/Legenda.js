@@ -15,12 +15,13 @@ export default class Legenda extends React.Component {
 
 const styles = StyleSheet.create({
   legenda: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection: "row"
   },
   words: {
+    flex: 1,
     color: "black",
     fontSize: 18,
     fontWeight: "bold",
+    textAlign: "center"
   }
 });

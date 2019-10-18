@@ -1,17 +1,19 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-import Title from "./Title";
-import Counter from "./Counter";
-import Credits from "./Credits";
-import Subtitle from "./Subtitle";
-import Legenda from "./Legenda";
-import TimeList from "./TimeList";
+import Title from "./Components/Title";
+import Counter from "./Components/Counter";
+import Credits from "./Components/Credits";
+import Subtitle from "./Components/Subtitle";
+import Legenda from "./Components/Legenda";
+import TimeList from "./Components/TimeList";
+import Settings from "./Components/Settings";
 
 export default class App extends React.Component {
-  state = {
-    times: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = { times: [] };
+  }
 
   addTime = time => {
     this.setState({
@@ -27,10 +29,8 @@ export default class App extends React.Component {
         <Subtitle>TIMER</Subtitle>
 
         <Counter
-          color={"darkblue"}
-          size={100}
           addTime={time => {
-            this.addTime(time)
+            this.addTime(time);
           }}
         />
 
@@ -40,7 +40,10 @@ export default class App extends React.Component {
 
         <TimeList list={this.state.times} />
 
-        <Credits>Elia Pitozzi</Credits>
+        <View style={styles.creditsAndSettings}>
+          <Credits>Elia Pitozzi</Credits>
+          <Settings />
+        </View>
       </View>
     );
   }
@@ -51,5 +54,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "whitesmoke"
+  },
+  creditsAndSettings: {
+    flexDirection: "row",
+    padding: 15
   }
 });

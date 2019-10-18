@@ -1,4 +1,5 @@
 import React from "react";
+//import {createStackNavigator, createAppContainer} from 'react-navigation';
 import { View, Text, StyleSheet } from "react-native";
 
 export default class Subtitle extends React.Component {
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   subtitle: {
-    margin: 5,
+    margin: 8,
     paddingVertical: 1,
     paddingHorizontal: 7,
     color: "white",

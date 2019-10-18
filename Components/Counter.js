@@ -1,13 +1,16 @@
 import React from "react";
-import { Text, TouchableWithoutFeedback } from "react-native";
-
+import { StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
 
 export default class Counter extends React.Component {
-  state = {
-    timer: null,
-    on: false,
-    count: 0
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      timer: null,
+      on: false,
+      count: 0
+    };
+  }
 
   addTime = time => {
     this.props.addTime(time);
@@ -40,27 +43,31 @@ export default class Counter extends React.Component {
 
   onLongPress = () => {
     // reset del timer
-    clearInterval(this.state.timer)
-    // inizializzo stato
+    clearInterval(this.state.timer);
+    // inizializzo stato timer
     this.setState({
       timer: null,
       on: false,
-      count: 0,
+      count: 0
     });
-  }
+  };
 
   render() {
-    const { color, size } = this.props;
-
     return (
-      <TouchableWithoutFeedback         
+      <TouchableWithoutFeedback
         onPress={this.onPress}
-        onLongPress={this.onLongPress}      
+        onLongPress={this.onLongPress}
       >
-        <Text style={{ color, fontSize: size, textAlign: "center" }}>
-          {this.countToString()}
-        </Text>
+        <Text style={styles.container}>{this.countToString()}</Text>
       </TouchableWithoutFeedback>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    fontSize: 100,
+    textAlign: "center",
+    color: "darkblue"
+  }
+});
