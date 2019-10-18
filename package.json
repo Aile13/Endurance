@@ -17,6 +17,7 @@
     "sharp": "^0.22.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "babel-preset-expo": "^7.0.0"
   },
   "private": true
