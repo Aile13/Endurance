@@ -30,7 +30,7 @@ export default class App extends React.Component {
           color={"darkblue"}
           size={100}
           addTime={time => {
-            this.addTime(time);
+            this.addTime(time)
           }}
         />
 
