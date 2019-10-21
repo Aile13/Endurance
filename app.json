@@ -25,6 +25,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Simple app that takes times in endurance run test. \nIt also converts times in grade."
+    "description": "Simple app that takes times in endurance run test. \nIt also converts times in grade.",
+    "githubUrl": "https://github.com/Aile13/Endurance"
   }
 }
