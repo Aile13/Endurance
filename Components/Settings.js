@@ -1,4 +1,5 @@
 import React from "react";
+import Toast from "react-native-simple-toast";
 import {
   StyleSheet,
   Picker,
@@ -8,7 +9,10 @@ import {
 } from "react-native";
 
 export default class Settings extends React.Component {
-  onPress = () => {};
+  onPress = () => {
+    // toast
+    Toast.show("Funzione ancora non disponibile.", Toast.LONG);
+  };
 
   render() {
     return (
