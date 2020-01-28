@@ -1,17 +1,10 @@
 import React from "react";
 import Toast from "react-native-simple-toast";
-import {
-  StyleSheet,
-  Picker,
-  Image,
-  View,
-  TouchableNativeFeedback
-} from "react-native";
+import { StyleSheet, Image, View, TouchableNativeFeedback } from "react-native";
 
-export default class Settings extends React.Component {
+export default class SettingButton extends React.Component {
   onPress = () => {
-    // toast
-    Toast.show("Funzione ancora non disponibile.", Toast.LONG);
+    this.props.onPress();
   };
 
   render() {

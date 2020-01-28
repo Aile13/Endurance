@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
 import Title from "./Components/Title";
 import Counter from "./Components/Counter";
@@ -7,9 +9,10 @@ import Credits from "./Components/Credits";
 import Subtitle from "./Components/Subtitle";
 import Legenda from "./Components/Legenda";
 import TimeList from "./Components/TimeList";
-import Settings from "./Components/Settings";
+import SettingButton from "./Components/Settings";
 
-export default class App extends React.Component {
+// Main class
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { times: [] };
@@ -42,13 +45,32 @@ export default class App extends React.Component {
 
         <View style={styles.creditsAndSettings}>
           <Credits>Elia Pitozzi</Credits>
-          <Settings />
+          <SettingButton
+            onPress={() => {
+              this.props.navigation.navigate("Settings");
+            }}
+          />
         </View>
       </View>
     );
   }
 }
 
+// creating root
+const AppNavigator = createStackNavigator(
+  {
+    Home: App,
+    Settings: SettingButton
+  },
+  {
+    initialRouteName: "Home"
+  }
+);
+
+// exporting app
+export default createAppContainer(AppNavigator);
+
+// Style
 const styles = StyleSheet.create({
   container: {
     flex: 1,
