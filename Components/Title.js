@@ -15,14 +15,16 @@ export default class Title extends React.Component {
 
 const styles = StyleSheet.create({
   header: {
-    borderColor: "black",
-    padding: 13
+    padding: 13,
+    marginBottom: 10,
+    backgroundColor: "rgb(255, 191, 0)"
   },
   title: {
     borderRadius: 50,
+    paddingVertical: 5,
     backgroundColor: "yellow",
     borderColor: "black",
-    borderWidth: 0.5,
+    borderWidth: 0.7,
     color: "black",
     fontSize: 27,
     textAlign: "center"

@@ -1,5 +1,4 @@
 import React from "react";
-import Toast from "react-native-simple-toast";
 import { StyleSheet, Image, View, TouchableNativeFeedback } from "react-native";
 
 export default class SettingButton extends React.Component {

@@ -1,58 +1,46 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import Storage from "./Storage.js";
+
 export default class TimeAndGrade extends React.Component {
   constructor(props) {
     super(props);
 
-    state = {
-      position: 0,
-      count: 0,
-      grade: 10
+    this.state = {
+      count: "270",
+      position: "1",
+      grade: 10,
+      tempoSufficienza: 270,
+      votoMin: 4,
+      votoMax: 10
     };
   }
 
   calculateGrade = () => {
-    // 3'00
-    if (this.props.count < 180) return "10☺";
-    // 3'05
-    else if (this.props.count < 185) return "10-";
-    // 3'10
-    else if (this.props.count < 190) return "9½";
-    // 3'15
-    else if (this.props.count < 195) return "9";
-    // 3'20
-    else if (this.props.count < 200) return "8½";
-    // 3'25
-    else if (this.props.count < 205) return "8+";
-    // 3'30
-    else if (this.props.count < 210) return "8";
-    // 3'38
-    else if (this.props.count < 218) return "8-";
-    // 3'45
-    else if (this.props.count < 225) return "7½";
-    // 3'52
-    else if (this.props.count < 232) return "7+";
-    // 4'00
-    else if (this.props.count < 240) return "7";
-    // 4'10
-    else if (this.props.count < 250) return "7-";
-    // 4'15
-    else if (this.props.count < 255) return "6½";
-    // 4'25
-    else if (this.props.count < 265) return "6+";
-    // 4'30
-    else if (this.props.count < 270) return "6";
-    // 4'35
-    else if (this.props.count < 275) return "6-";
-    // 4'40
-    else if (this.props.count < 280) return "5½";
-    // 4'45
-    else if (this.props.count < 285) return "5";
-    // 4'50
-    else if (this.props.count < 290) return "4½";
-    // 4'55
-    else return "4";
+    const tempo = this.props.count;
+    const tempoSuff = this.state.tempoSufficienza;
+    const votoMin = this.state.votoMin;
+    const votoMax = this.state.votoMax;
+    const stepVoto = 5;
+
+    const gradesSymbols = ["", "+", "½", "-"];
+    const length = gradesSymbols.length;
+
+    let timeDiff = (6 - votoMin) * length * stepVoto - stepVoto;
+    for (let voto = votoMin; voto < votoMax; voto++) {
+      for (let i = 0; i < length; i++) {
+        if (tempo > tempoSuff + timeDiff) {
+          // se trovo meno, cambio voto, uno in più
+          if (gradesSymbols[i] === "-") {
+            voto++;
+          }
+          return voto.toString(10) + gradesSymbols[i];
+        }
+        timeDiff -= stepVoto;
+      }
+    }
+    return votoMax.toString(10) + "👍";
   };
 
   countToString = () => {
@@ -65,13 +53,22 @@ export default class TimeAndGrade extends React.Component {
     return (1 + this.props.i).toString().padStart(2, "0");
   };
 
-  componentWillMount = () => {
+  async componentDidMount() {
+    // read from local data and set
+    const data = await Storage.readData();
+    this.setState({
+      tempoSufficienza: data.tempoSufficienza,
+      votoMin: data.votoMinimo,
+      votoMax: data.votoMassimo
+    });
+
+    // calculating grade and formatting count
     this.setState({
       count: this.countToString(),
       position: this.positionToString(),
       grade: this.calculateGrade()
     });
-  };
+  }
 
   render() {
     return (

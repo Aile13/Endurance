@@ -9,13 +9,22 @@ import Credits from "./Components/Credits";
 import Subtitle from "./Components/Subtitle";
 import Legenda from "./Components/Legenda";
 import TimeList from "./Components/TimeList";
-import SettingButton from "./Components/Settings";
+import SettingButton from "./Components/SettingButton";
+import Setting from "./Components/Setting";
+import Storage from "./Components/Storage";
 
 // Main class
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    // time list
     this.state = { times: [] };
+  }
+
+  componentDidMount() {
+    // init estremi voti e tempo sufficienza se non già inizializzati
+    Storage.initialInitParameters();
   }
 
   addTime = time => {
@@ -60,7 +69,7 @@ class App extends React.Component {
 const AppNavigator = createStackNavigator(
   {
     Home: App,
-    Settings: SettingButton
+    Settings: Setting
   },
   {
     initialRouteName: "Home"
@@ -75,7 +84,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "whitesmoke"
+    backgroundColor: "whitesmoke",
+    justifyContent: "space-between"
   },
   creditsAndSettings: {
     flexDirection: "row",
